@@ -1,10 +1,10 @@
 
-const Login = () => {
+const Home = () => {
     return(
         <div className="container">
-            <p>Login</p>
+            <p>Home</p>
         </div>
     )
 }
 
-export default Login;
+export default Home;

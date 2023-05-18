@@ -1,6 +1,7 @@
 import './Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays, faArrowRightToBracket, faPaw } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     return(
@@ -13,26 +14,27 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse ms-4" id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item" id='nav-item'>
-                            <button className="btn border border-0" type="button" id='navbar-button'>
-                                <span>Home</span>
-                            </button>
+                            <NavLink className="btn border border-0" id='navbar-button' exact to="/" activeClassName="active">
+                            <span>Home</span>
+                            </NavLink>
                         </li>
                         <li className="nav-item" id='nav-item'>
-                            <button className="btn border border-0" type="button" id='navbar-button'>
-                                <span>Lost Pets</span> <FontAwesomeIcon icon={faCalendarDays} id='icon'/>
-                            </button>
+                            <NavLink className="btn border border-0" id='navbar-button' to="/lost-pets" activeClassName="active">
+                            <span>Lost Pets</span> <FontAwesomeIcon icon={faCalendarDays} id='icon'/>
+                            </NavLink>
+
                         </li>
                     </ul>
                     <ul className="navbar-nav" id='navbar-left'>
                         <li className="nav-item" id='nav-item'>
-                            <button className="btn border border-0" type="button" id='navbar-button'>
-                                <span >Login</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
-                            </button>
+                            <NavLink className="btn border border-0" id='navbar-button' to="/login" activeClassName="active">
+                            <span >Login</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
+                            </NavLink>
                         </li>
                         <li className="nav-item" id='nav-item'>
-                            <button className="btn border border-0" type="button" id='navbar-button'>
-                                <span >Register</span> <FontAwesomeIcon icon={faPaw} id='icon'/>
-                            </button>
+                            <NavLink className="btn border border-0" id='navbar-button' to="/register" activeClassName="active">
+                            <span >Register</span> <FontAwesomeIcon icon={faPaw} id='icon'/>
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
