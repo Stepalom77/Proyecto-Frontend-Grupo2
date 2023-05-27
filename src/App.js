@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import MascotasPerdidas from './components/MascotasPerdidas/MascotasPerdidas'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
+import Logout from './components/Logout/Logout'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/lost-pets' element={<MascotasPerdidas/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/logout' element={<Logout/>}/>
         <Route path='/register' element={<Register/>}/>
       </Routes>
       <Footer/>
