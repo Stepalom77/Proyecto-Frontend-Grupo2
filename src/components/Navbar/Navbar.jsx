@@ -4,9 +4,17 @@ import { MyContext } from '../../context/MyProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays, faArrowRightToBracket, faPaw } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-    const { isLogin } = useContext(MyContext);
+    const navigate = useNavigate();
+    const { isLogin, setIsLogin } = useContext(MyContext);
+
+    const logout = async() => {
+        localStorage.clear()
+        setIsLogin(false);
+        navigate("/logout");
+    }
     return(
         <nav className="navbar navbar-expand-lg mb-2 " id='navbar'>
             <div className="container-fluid">
@@ -51,10 +59,10 @@ const Navbar = () => {
                             <span >Profile</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
                             </NavLink>
                         </li>
-                        <li className="nav-item" id='nav-item'>
-                            <NavLink className="btn border border-0" id='navbar-button' to="/logout" activeclassname="active">
+                        <li className="nav-item" id='nav-item' style={{cursor: 'pointer'}} onClick={logout}>
+                            <div className="btn border border-0" id='navbar-button'>
                             <span >Logout</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
-                            </NavLink>
+                            </div>
                         </li>
                     </ul>}
                 </div>

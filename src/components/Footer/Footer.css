@@ -1,25 +1,3 @@
-#footer {
-    background-color: rgb(7, 7, 61);
-    height: 60vh;
-}
 
-#empty-footer {
-    height: 3vh;
-}
-
-#footer #icon {
-    
-    margin-right: 0.25rem;
-    color: white;
-}
-
-#custom-border {
-    border-top: 1px solid rgba(255, 255, 255, 0.25); 
-}
-
-#footer-text {
-    color: rgb(9, 173, 140);
-    text-decoration: underline;
-}
 
   

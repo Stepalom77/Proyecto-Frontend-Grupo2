@@ -1,1 +1,111 @@
+/*Login */
+#login-header {
+    color: green;
+}
 
+#login-margin-top {
+    margin-top: 6rem;
+    margin-bottom: 2.50rem;
+}
+
+#icons-login {
+    color: green;
+    padding-right: 0.50rem;
+}
+
+#login-button {
+    background-color: green;
+    color: white;
+}
+
+/*Logout */
+
+#pets-button {
+    background-color: rgb(7, 7, 61);
+    color: white;
+}
+
+/*Footer */
+
+#footer {
+    background-color: rgb(7, 7, 61);
+    height: 60vh;
+}
+
+#empty-footer {
+    height: 3vh;
+}
+
+#footer #icon {
+    
+    margin-right: 0.25rem;
+    color: white;
+}
+
+#custom-border {
+    border-top: 1px solid rgba(255, 255, 255, 0.25); 
+}
+
+#footer-text {
+    color: rgb(9, 173, 140);
+    text-decoration: underline;
+}
+
+/*NavBar */
+
+#navbar .active {
+    color: white;
+}
+
+#navbar {
+    background-color: rgb(7, 7, 61);
+}
+
+#navbar-button {
+    color: rgb(9, 173, 140);
+}
+
+#navbar-brand {
+    color: rgb(9, 173, 140);
+}
+
+#icon {
+    margin-left: 0.25rem;
+}
+
+#navbar-left {
+    margin-right: 11rem;
+}
+
+/*Register */
+
+#register-header-color {
+    color: green;
+}
+
+#register-margin {
+    margin-top: 6rem;
+    margin-bottom: 2.50rem;
+}
+
+#icons-register {
+    color: green;
+}
+
+#register-button {
+    background-color: green;
+    color: white;
+}
+
+/*Media Queries */
+
+@media only screen and (max-width: 600px) {
+    #navbarNav {
+        margin-left: 0px !important;
+        margin-bottom: 0px !important;
+    }
+    
+    #nav-item {
+        margin-bottom: 0.25rem;
+    }
+}
