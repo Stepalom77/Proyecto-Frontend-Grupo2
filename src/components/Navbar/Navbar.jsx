@@ -1,9 +1,12 @@
 import './Navbar.css'
+import React, {useContext} from 'react';
+import { MyContext } from '../../context/MyProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays, faArrowRightToBracket, faPaw } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
+    const { isLogin } = useContext(MyContext);
     return(
         <nav className="navbar navbar-expand-lg mb-2 " id='navbar'>
             <div className="container-fluid">
@@ -14,29 +17,46 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse ms-4" id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item" id='nav-item'>
-                            <NavLink className="btn border border-0" id='navbar-button' exact to="/" activeClassName="active">
+                            <NavLink className="btn border border-0" id='navbar-button' to="/" activeclassname="active">
                             <span>Home</span>
                             </NavLink>
                         </li>
                         <li className="nav-item" id='nav-item'>
-                            <NavLink className="btn border border-0" id='navbar-button' to="/lost-pets" activeClassName="active">
+                            <NavLink className="btn border border-0" id='navbar-button' to="/lost-pets" activeclassname="active">
                             <span>Lost Pets</span> <FontAwesomeIcon icon={faCalendarDays} id='icon'/>
                             </NavLink>
 
                         </li>
                     </ul>
-                    <ul className="navbar-nav" id='navbar-left'>
+                    {!isLogin && <ul className="navbar-nav" id='navbar-left'>
                         <li className="nav-item" id='nav-item'>
-                            <NavLink className="btn border border-0" id='navbar-button' to="/login" activeClassName="active">
+                            <NavLink className="btn border border-0" id='navbar-button' to="/login" activeclassname="active">
                             <span >Login</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
                             </NavLink>
                         </li>
                         <li className="nav-item" id='nav-item'>
-                            <NavLink className="btn border border-0" id='navbar-button' to="/register" activeClassName="active">
+                            <NavLink className="btn border border-0" id='navbar-button' to="/register" activeclassname="active">
                             <span >Register</span> <FontAwesomeIcon icon={faPaw} id='icon'/>
                             </NavLink>
                         </li>
-                    </ul>
+                    </ul>}
+                    {isLogin && <ul className="navbar-nav" id='navbar-left'>
+                        <li className="nav-item" id='nav-item'>
+                            <NavLink className="btn border border-0" id='navbar-button' to="/user-profile/:id/my-pets" activeclassname="active">
+                            <span >Your Pets</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
+                            </NavLink>
+                        </li>
+                        <li className="nav-item" id='nav-item'>
+                            <NavLink className="btn border border-0" id='navbar-button' to="/user-profile/:id/profile" activeclassname="active">
+                            <span >Profile</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
+                            </NavLink>
+                        </li>
+                        <li className="nav-item" id='nav-item'>
+                            <NavLink className="btn border border-0" id='navbar-button' to="/logout" activeclassname="active">
+                            <span >Logout</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
+                            </NavLink>
+                        </li>
+                    </ul>}
                 </div>
             </div>
         </nav>

@@ -7,10 +7,12 @@ import MascotasPerdidas from './components/MascotasPerdidas/MascotasPerdidas'
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
 import Logout from './components/Logout/Logout'
+import MyProvider from './context/MyProvider';
 
 function App() {
   return (
     <div className="App">
+      <MyProvider>
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -20,6 +22,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
       </Routes>
       <Footer/>
+      </MyProvider>
     </div>
   );
 }
