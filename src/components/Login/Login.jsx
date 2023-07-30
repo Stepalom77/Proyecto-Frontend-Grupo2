@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { MyContext } from '../../context/MyProvider';
 import axios from 'axios'
 import { API_ROUTE } from '../../helpers/ApiRoute'
+import { parseJwt } from '../../helpers/helperFunctions';
 const Login = () => {
     const navigate = useNavigate();
-    const { setIsLogin } = useContext(MyContext);
+    const { setIsLogin, setCurrentUser} = useContext(MyContext);
     const [userLoginData, setUserLoginData] = useState({
         email: '',
         password:'',
@@ -31,6 +32,10 @@ const Login = () => {
             email: '',
             password:'',
         })
+        const decodedJWT = parseJwt(data.data.token);
+        const userName = encodeURIComponent(decodedJWT.name);
+        console.log(userName)
+        setCurrentUser(userName);
         localStorage.setItem('token', data.data.token)
         setIsLogin(true);
         navigate("/");

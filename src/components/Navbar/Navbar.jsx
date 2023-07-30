@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { isLogin, setIsLogin } = useContext(MyContext);
+    const { isLogin, setIsLogin, currentUser } = useContext(MyContext);
 
     const logout = async() => {
         localStorage.clear()
@@ -50,12 +50,12 @@ const Navbar = () => {
                     </ul>}
                     {isLogin && <ul className="navbar-nav" id='navbar-left'>
                         <li className="nav-item" id='nav-item'>
-                            <NavLink className="btn border border-0" id='navbar-button' to="/user-profile/:id/my-pets" activeclassname="active">
+                            <NavLink className="btn border border-0" id='navbar-button' to={`/user-profile/${currentUser}/my-pets`} activeclassname="active">
                             <span >Your Pets</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
                             </NavLink>
                         </li>
                         <li className="nav-item" id='nav-item'>
-                            <NavLink className="btn border border-0" id='navbar-button' to="/user-profile/:id/profile" activeclassname="active">
+                            <NavLink className="btn border border-0" id='navbar-button' to={`/user-profile/${currentUser}/profile`} activeclassname="active">
                             <span >Profile</span> <FontAwesomeIcon icon={faArrowRightToBracket} id='icon'/>
                             </NavLink>
                         </li>
