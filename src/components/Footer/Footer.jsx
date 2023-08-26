@@ -4,7 +4,7 @@ import { faCopyright } from '@fortawesome/free-solid-svg-icons'
 
 const Footer = () => {
     return(
-        <footer className='border border-0' id="footer">
+        <footer className='bg-navy footer border border-0' id="footer">
             <div className="container text-center text-lg-start" id='empty-footer'></div>
             <div className="container text-center text-lg-start mt-5 d-flex flex-row justify-content-between" id='custom-border'>
                 <div className='mt-4'>
