@@ -1,0 +1,14 @@
+.navbar-brand img {
+    display: block;
+    height: 10vh;
+    position: relative;
+    top: -1vh;
+}
+
+.navbar-nav .nav-link{
+    align-items: center;
+    color: #21be9c;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}

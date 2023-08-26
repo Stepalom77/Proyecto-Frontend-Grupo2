@@ -1,3 +1,7 @@
-
+.footer {
+    background: url('../../../public/assets/img/footer.png') center center no-repeat;
+    background-size: cover;
+    height: 50vh;
+}
 
   
