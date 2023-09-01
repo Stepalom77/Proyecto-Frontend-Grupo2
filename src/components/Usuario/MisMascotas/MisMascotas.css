@@ -1,0 +1,18 @@
+.pet-header-color {
+    color: green;
+}
+
+#edit-button {
+    background-color: rgb(33, 126, 23);
+    color: white;
+}
+
+.pet-lost{
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
+
+.pet-found{
+    color: rgb(33, 126, 23);
+    font-weight: bold;
+}

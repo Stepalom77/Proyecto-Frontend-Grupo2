@@ -1,6 +1,31 @@
-import './MascotasPerdidas.css'
+import React, { useEffect, useState } from 'react';
+import './MascotasPerdidas.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaw } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from 'react-router-dom';
 
 const MascotasPerdidas = () => {
+    const [lostPets, setLostPets] = useState([]);
+
+    useEffect(() => {
+        const token = 'Bearer TokenImplicitoParaLaAplicacionWeb';
+        const headers = {
+            Authorization: token,
+        };
+
+        const fetchLostPets = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/pets', { headers });
+                const data = await response.json();
+                const lostPetsData = data.filter(pet => pet.status_id === 2);
+                setLostPets(lostPetsData);
+            } catch (error) {
+                console.error('Error fetching lost pets:', error);
+            }
+        };
+
+        fetchLostPets();
+    }, []);
     return(
         <div className="">
             {/* Banner */}
@@ -29,19 +54,24 @@ const MascotasPerdidas = () => {
                             <h3 class="showcase-title">Have you seen <span class="stand-out">me?</span></h3>
                             <div class="row justify-content-around bounce-in-bottom" id="cardDisplayer">
                                 {/* Ejemplo */}
-                                    <article class="card col-md-10 col-lg-5 col-xl-4">
+                                {lostPets.map(pet => (
+                                    <article class="card col-md-10 col-lg-5 col-xl-4" key={pet.pet_id}>
                                             
                                         <a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href="/pet/123">
                                             <img src="https://media.discordapp.net/attachments/1063874117507494048/1072561078661300224/abuela_de_dos_floppy_eared_Beauceron_dog_happy_tongue_out_using_e4270418-f93d-403b-9487-07c1dfb275dd.png?width=1024&height=1024" class="card-img-top" alt="" />
                                         </a>
+
+                                        {pet.photos[0]?.url && <a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href="/pet/123">
+                                            <img src={pet.photos[0]?.url} class="card-img-top" alt={pet.name} />
+                                        </a> }
                                         
                                         <div className="card-body">
-                                            <h5 className="card-title"><a href="/pet/123">Example</a></h5>
-                                            <p className="card-text special">Dog</p>
-                                            <p className="card-text special"><span className="special" >Breed: </span>Beauceron</p>
-                                            <p className="card-text special"><span className="special" >Age: </span>2 years</p>
-                                            <p className="card-text special"><span className="special" >Weight: </span>32 Kg</p>
-                                            <p className="card-text special owner"><span className="special owner" >Owner: </span>Test</p>
+                                            <h5 className="card-title"><a href="/pet/123">{pet.name}</a></h5>
+                                            <p className="card-text special">{pet.type}</p>
+                                            <p className="card-text special"><span className="special" >Breed: </span>{pet.breed}</p>
+                                            <p className="card-text special"><span className="special" >Age: </span>{pet.age}</p>
+                                            <p className="card-text special"><span className="special" >Weight: </span>{pet.weight}</p>
+                                            <p className="card-text special owner"><span className="special owner" >Owner: </span>{pet.owner}</p>
                                             
                                             <p className="card-text contact"><span className="material-symbols-outlined" >call</span>+0123456789</p>
                                             <p className="card-text contact"><span className="material-symbols-outlined" >mail</span>test@mapet.com</p>
@@ -56,6 +86,7 @@ const MascotasPerdidas = () => {
                                             
                                         </div>
                                     </article>
+                                     ))}
                                 {/* Fin ejemplo */}
                             </div>
                         </section>
