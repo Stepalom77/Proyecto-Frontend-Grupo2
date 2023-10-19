@@ -9,7 +9,7 @@ import { API_ROUTE } from '../../helpers/ApiRoute'
 import { parseJwt } from '../../helpers/helperFunctions';
 const Login = () => {
     const navigate = useNavigate();
-    const { setIsLogin, setCurrentUser} = useContext(MyContext);
+    const { setIsLogin, setCurrentUser, setCurrentUserName} = useContext(MyContext);
     const [userLoginData, setUserLoginData] = useState({
         email: '',
         password:'',
@@ -33,9 +33,12 @@ const Login = () => {
             password:'',
         })
         const decodedJWT = parseJwt(data.data.token);
-        const userName = encodeURIComponent(decodedJWT.name);
+        const userName = decodedJWT.name;
+        const emailUser = decodedJWT.email;
         console.log(userName)
-        setCurrentUser(userName);
+        console.log(emailUser)
+        setCurrentUser(emailUser);
+        setCurrentUserName(userName);
         localStorage.setItem('token', data.data.token)
         setIsLogin(true);
         navigate("/");
