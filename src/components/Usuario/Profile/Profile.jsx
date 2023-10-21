@@ -1,0 +1,97 @@
+import React, { useEffect, useState, useContext } from 'react';
+import './Profile.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { MyContext } from '../../../context/MyProvider';
+import axios from 'axios'
+import { API_ROUTE } from '../../../helpers/ApiRoute';
+import { faEnvelope, faCircleUser, faPhone, faPencil } from '@fortawesome/free-solid-svg-icons'
+
+const Profile = () => {
+    const { currentUserName, setCurrentUser, setCurrentUserName} = useContext(MyContext);
+    const [user, setUser] = useState(null);
+    const [userEditData, setUserEditData] = useState({
+        username: '',
+        email: '',
+        mobile_number: ''
+    });
+    const [jwt, setJwt] = useState(null);
+
+    useEffect(() => {
+        setJwt(localStorage.getItem('token')); 
+    }, []);
+
+    useEffect(() => {
+        if(jwt && currentUserName) {
+            const getUser = async() => {
+                const userData = await axios.get(API_ROUTE + 'users/' + currentUserName, {headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }});
+                setUser(userData.data);
+            }
+            getUser();
+        }
+    }, [jwt, currentUserName]);
+
+    const userEditChange = (e) => {
+        const { name, value } = e.target;
+        setUserEditData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      };
+
+    const userEditSubmit = async (e) => {
+        e.preventDefault();
+        const userData = await axios.patch(API_ROUTE + 'users', userEditData,  {headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${jwt}`
+        }});
+        setUserEditData({
+            username: '',
+            email: '',
+            mobile_number: ''
+        });
+        setCurrentUser(userData.data.email);
+        setCurrentUserName(userData.data.username);
+      };
+
+
+    return(
+        <section className="container">
+            <h2 className="pb-4 text-center"><span className='me-1 pet-header-color'>{currentUserName}</span><span>Profile Information</span></h2>
+            <form className='mb-3' onSubmit={(e) => userEditSubmit(e)}>
+                <div className="mb-3 px-5">
+                    <FontAwesomeIcon icon={faCircleUser} id='icons-login'/><label htmlFor="username" className="form-label">Your Name:</label>
+                        <input type="text" className="form-control" id="username" placeholder={user && user.username ? user.username : ''} name='username'
+                        onChange={(e) => {
+                            userEditChange(e);
+                        }}/>
+                </div>
+                <div className="mb-3 px-5">
+                    <FontAwesomeIcon icon={faEnvelope} id='icons-login'/> <label htmlFor="emailLogin" className="form-label ms-1">Your Email:</label>
+                        <input type="email" className="form-control" id="emailLogin" aria-describedby="emailHelp" placeholder={user && user.email ? user.email : ''} name='email'
+                        onChange={(e) => {
+                            userEditChange(e);
+                        }}/>
+                </div>
+                <div className="mb-3 px-5">
+                    <FontAwesomeIcon icon={faPhone} id='icons-login'/><label htmlFor="mobileNumber" className="form-label">Enter Phone Number:</label>
+                        <input type="text" className="form-control" id="mobileNumber" placeholder={user && user.mobile_number ? user.mobile_number : ''} name='mobile_number'
+                        onChange={(e) => {
+                            userEditChange(e);
+                        }}/>
+                </div>
+                <div className="d-flex flex-row justify-content-center">
+                    <button type="submit" className="btn d-flex justify-content-around button-edit">
+                        <span className='pe-2'>Edit Profile</span><FontAwesomeIcon icon={faPencil}/>
+                    </button>
+                </div>
+
+                
+                    </form>
+        </section>
+    )
+}
+
+export default Profile;

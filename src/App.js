@@ -10,6 +10,7 @@ import Register from './components/Register/Register'
 import Logout from './components/Logout/Logout'
 import MyProvider from './context/MyProvider';
 import MascotasRegister from './components/Usuario/MascotasRegisterEdit/MascotasRegisterEdit';
+import Profile from './components/Usuario/Profile/Profile';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
+        <Route path='/profile/:user' element={<Profile/>}/>
         <Route path='/lost-pets' element={<MascotasPerdidas/>}/>
         <Route path='/pet' element={<MascotasRegister/>}/>
         <Route path='/my-pets' element={<MisMascotas/>}/>
