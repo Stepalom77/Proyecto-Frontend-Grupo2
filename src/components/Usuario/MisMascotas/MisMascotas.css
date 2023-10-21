@@ -16,3 +16,16 @@
     color: rgb(33, 126, 23);
     font-weight: bold;
 }
+
+.table {
+    border-collapse: collapse;
+  }
+  
+/* Elimina el espacio entre las columnas */
+.table th, .table td {
+padding: 0;
+}
+
+.text-left-header {
+    text-align: left;
+}

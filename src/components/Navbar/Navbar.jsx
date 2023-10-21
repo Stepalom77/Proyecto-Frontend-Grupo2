@@ -17,9 +17,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-lg" id='navbar'>
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">
-                        
-                        <img className="logo" src="/assets/img/mapet.svg" alt="MAPet"/>
-                    
+                    <img className="logo" src="/assets/img/mapet.svg" alt="MAPet"/>
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -52,7 +50,7 @@ const Navbar = () => {
                     </ul>}
                     {isLogin && <ul className="navbar-nav" id='navbar-left'>
                         <li className="nav-item" id='nav-item'>
-                            <NavLink className="btn border border-0 nav-link" id='navbar-button' to={`/user-profile/${currentUser}/my-pets`} activeclassname="active">
+                            <NavLink className="btn border border-0 nav-link" id='navbar-button' to={`/my-pets`} activeclassname="active">
                             <span >Your Pets</span> <span className="material-symbols-outlined">sound_detection_dog_barking</span>
                             </NavLink>
                         </li>

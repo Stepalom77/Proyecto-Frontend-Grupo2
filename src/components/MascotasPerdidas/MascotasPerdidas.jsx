@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './MascotasPerdidas.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaw } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
+import { MyContext } from '../../context/MyProvider';
 
 const MascotasPerdidas = () => {
     const [lostPets, setLostPets] = useState([]);
+    const { currentUser } = useContext(MyContext);
 
     useEffect(() => {
         const token = 'Bearer TokenImplicitoParaLaAplicacionWeb';
@@ -66,22 +65,18 @@ const MascotasPerdidas = () => {
                                         </a> }
                                         
                                         <div className="card-body">
-                                            <h5 className="card-title"><a href="/pet/123">{pet.name}</a></h5>
-                                            <p className="card-text special">{pet.type}</p>
+                                            <h5 className="card-title">{pet.name}</h5>
+                                            <p className="card-text special"><span className="special" >Type: </span>{pet.type}</p>
                                             <p className="card-text special"><span className="special" >Breed: </span>{pet.breed}</p>
                                             <p className="card-text special"><span className="special" >Age: </span>{pet.age}</p>
-                                            <p className="card-text special"><span className="special" >Weight: </span>{pet.weight}</p>
-                                            <p className="card-text special owner"><span className="special owner" >Owner: </span>{pet.owner}</p>
+                                            <p className="card-text special"><span className="special" >Owner: </span>{pet.owner}</p>
                                             
                                             <p className="card-text contact"><span className="material-symbols-outlined" >call</span>+0123456789</p>
                                             <p className="card-text contact"><span className="material-symbols-outlined" >mail</span>test@mapet.com</p>
                                             <div className="btns-wrapper">
+                                            {currentUser && (
                                                 <button className="btn btn-mapet-primary">Contact owner <span className="material-symbols-outlined">pets</span></button>
-                                            </div>
-                                            
-                                            <div className="btns-wrapper">
-                                                <button className="btn btn-secondary">Contact owner <span className="material-symbols-outlined">pets</span></button>
-                                            </div>
+                                            )}                                            </div>
                                             <p className="card-text contact" style={{gap: 0.3 + 'rem'}}><a className="text-success" href="/login"><span className="material-symbols-outlined" >login</span>Log in </a>  to see owner's contact information</p>
                                             
                                         </div>
