@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './MascotasPerdidas.css';
 import { MyContext } from '../../context/MyProvider';
+import { API_ROUTE } from '../../helpers/ApiRoute';
 
 const MascotasPerdidas = () => {
     const [lostPets, setLostPets] = useState([]);
@@ -14,7 +15,7 @@ const MascotasPerdidas = () => {
 
         const fetchLostPets = async () => {
             try {
-                const response = await fetch('http://localhost:8000/pets', { headers });
+                const response = await fetch( API_ROUTE + 'pets', { headers });
                 const data = await response.json();
                 const lostPetsData = data.filter(pet => pet.status_id === 2);
                 setLostPets(lostPetsData);

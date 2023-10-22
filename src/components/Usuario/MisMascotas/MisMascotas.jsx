@@ -5,6 +5,7 @@ import { faPencil, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-ico
 import { NavLink } from 'react-router-dom';
 import { MyContext } from '../../../context/MyProvider';
 import AlertMessage from './AlertMessage'; // Importa el componente de alerta
+import { API_ROUTE } from '../../../helpers/ApiRoute';
 
 const MisMascotas = () => {
     const [pets, setPets] = useState([]);
@@ -22,7 +23,7 @@ const MisMascotas = () => {
 
         const fakeAPICall = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/pets/user/${currentUserName}`, { headers });
+                const response = await fetch(API_ROUTE + `pets/user/${currentUserName}`, { headers });
                 const data = await response.json();
                 setPets(data);
                 setIsLoading(false);
@@ -42,7 +43,7 @@ const MisMascotas = () => {
         };
 
         try {
-            await fetch(`http://localhost:8000/pets/${idPet}`, {
+            await fetch(API_ROUTE + `pets/${idPet}`, {
                 method: 'DELETE',
                 headers,
             });
