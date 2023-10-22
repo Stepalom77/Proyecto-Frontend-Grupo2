@@ -57,13 +57,13 @@ const MascotasPerdidas = () => {
                                 {lostPets.map(pet => (
                                     <article class="card col-md-10 col-lg-5 col-xl-4" key={pet.pet_id}>
                                             
-                                        {<a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href="/pet/123">
+                                        {/*<a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href="/pet/123">
                                             <img src="https://media.discordapp.net/attachments/1063874117507494048/1072561078661300224/abuela_de_dos_floppy_eared_Beauceron_dog_happy_tongue_out_using_e4270418-f93d-403b-9487-07c1dfb275dd.png?width=1024&height=1024" class="card-img-top" alt="" />
-                                        </a>}
+                                        </a>*/}
 
-                                        {/*pet.photos[0]?.url && <a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href="/pet/123">
+                                        {pet.photos[0]?.url && <a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href='#'>
                                             <img src={pet.photos[0]?.url} class="card-img-top" alt={pet.name} />
-                                        </a> */}
+                                        </a> }
                                         
                                         <div className="card-body">
                                             <h5 className="card-title">{pet.name}</h5>
