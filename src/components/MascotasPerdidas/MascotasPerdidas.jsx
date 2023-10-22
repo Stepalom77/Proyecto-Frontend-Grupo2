@@ -4,7 +4,7 @@ import { MyContext } from '../../context/MyProvider';
 
 const MascotasPerdidas = () => {
     const [lostPets, setLostPets] = useState([]);
-    const { currentUser } = useContext(MyContext);
+    const { currentUser, isLogin } = useContext(MyContext);
 
     useEffect(() => {
         const token = 'Bearer TokenImplicitoParaLaAplicacionWeb';
@@ -56,23 +56,22 @@ const MascotasPerdidas = () => {
                                 {lostPets.map(pet => (
                                     <article class="card col-md-10 col-lg-5 col-xl-4" key={pet.pet_id}>
                                             
-                                        <a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href="/pet/123">
+                                        {<a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href="/pet/123">
                                             <img src="https://media.discordapp.net/attachments/1063874117507494048/1072561078661300224/abuela_de_dos_floppy_eared_Beauceron_dog_happy_tongue_out_using_e4270418-f93d-403b-9487-07c1dfb275dd.png?width=1024&height=1024" class="card-img-top" alt="" />
-                                        </a>
+                                        </a>}
 
-                                        {pet.photos[0]?.url && <a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href="/pet/123">
+                                        {/*pet.photos[0]?.url && <a className="pet-name" style={{textDecoration: 'none !important', color: '#000A36 !important'}} href="/pet/123">
                                             <img src={pet.photos[0]?.url} class="card-img-top" alt={pet.name} />
-                                        </a> }
+                                        </a> */}
                                         
                                         <div className="card-body">
                                             <h5 className="card-title">{pet.name}</h5>
                                             <p className="card-text special"><span className="special" >Type: </span>{pet.type}</p>
                                             <p className="card-text special"><span className="special" >Breed: </span>{pet.breed}</p>
                                             <p className="card-text special"><span className="special" >Age: </span>{pet.age}</p>
-                                            <p className="card-text special"><span className="special" >Owner: </span>{pet.owner}</p>
-                                            
-                                            <p className="card-text contact"><span className="material-symbols-outlined" >call</span>+0123456789</p>
-                                            <p className="card-text contact"><span className="material-symbols-outlined" >mail</span>test@mapet.com</p>
+                                            {/*isLogin && <p className="card-text special"><span className="special" >Owner: </span>{pet.owner.username}</p>*/}
+                                            {/*isLogin && <p className="card-text contact"><span className="material-symbols-outlined" >call</span> {pet.owner.mobile_number} </p>*/}
+                                            {/*isLogin && <p className="card-text contact"><span className="material-symbols-outlined" >mail</span> {pet.owner.email} </p>*/}
                                             <div className="btns-wrapper">
                                             {currentUser && (
                                                 <button className="btn btn-mapet-primary">Contact owner <span className="material-symbols-outlined">pets</span></button>

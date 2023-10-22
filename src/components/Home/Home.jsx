@@ -3,9 +3,9 @@ import './Home.css';
 const Home = () => {
     return(
         <div className="m-0 p-0">
-            <div className="container-xxl bg-navy position-relative p-0">
-                <div className="container-xxl py-5 hero-header mb-5">
-                    <div className="container my-5 py-5 px-lg-5">
+            <div className="bg-navy position-relative p-0">
+                <div className="py-5 hero-header mb-5">
+                    <div className="my-5 py-5 px-lg-5">
                         <div className="row g-5 py-5">
                             <div className="col-lg-6 text-center text-lg-start">
                                 <h1 className="text-white mb-4 animated zoomIn">Keep your furry friend safe and close with MAPet.</h1>
@@ -23,8 +23,8 @@ const Home = () => {
             </div>
             
             <main className="row justify-content-around">
-                <div className="container-xxl py-5">
-                    <div className="container px-lg-5">
+                <div className="py-5">
+                    <div className="px-lg-5">
                         <div className="row g-5">
                             <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div className="section-title position-relative mb-4 pb-2">
