@@ -113,17 +113,26 @@ const MascotasRegister = () => {
           }));
         formData.append('json', JSON.stringify(petData));
         console.log(petData);
-        const createPet = await axios.post(API_ROUTE + 'pets', formData,  {headers: {
-            'Authorization': `Bearer ${jwt}`
-        }});
-        setPetData({
-            name: '',
-            owner_user: '',
-            pet_type: 0,
-            breed_id: 0,
-            pet_status: 0,
-            age: 0
-        });
+        try {
+            const createPet = await axios.post(API_ROUTE + 'pets', formData, {
+              headers: {
+                'Authorization': `Bearer ${jwt}`,
+              },
+            });
+            // If the request is successful
+            setAlert('Pet successfully created!');
+            setPetData({
+              name: '',
+              owner_user: '',
+              pet_type: 0,
+              breed_id: 0,
+              pet_status: 0,
+              age: 0,
+            });
+          } catch (error) {
+            // If the request fails
+            setAlert(`Failed to create pet`);
+          }
       };
 
     return (

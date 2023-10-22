@@ -15,6 +15,7 @@ const Profile = () => {
         mobile_number: ''
     });
     const [jwt, setJwt] = useState(null);
+    const [alert, setAlert] = useState('');
 
     useEffect(() => {
         setJwt(localStorage.getItem('token')); 
@@ -43,23 +44,30 @@ const Profile = () => {
 
     const userEditSubmit = async (e) => {
         e.preventDefault();
-        const userData = await axios.patch(API_ROUTE + 'users', userEditData,  {headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${jwt}`
-        }});
-        setUserEditData({
-            username: '',
-            email: '',
-            mobile_number: ''
-        });
-        setCurrentUser(userData.data.email);
-        setCurrentUserName(userData.data.username);
+        try {
+            const userData = await axios.patch(API_ROUTE + 'users', userEditData,  {headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwt}`
+            }});
+            setUserEditData({
+                username: '',
+                email: '',
+                mobile_number: ''
+            });
+            setCurrentUser(userData.data.email);
+            setCurrentUserName(userData.data.username);
+            setAlert('Data successfully created!');
+        } catch (error) {
+            // If the request fails
+            setAlert(`Failed to update data`);
+          }
       };
 
 
     return(
         <section className="container">
             <h2 className="pb-4 text-center"><span className='me-1 pet-header-color'>{currentUserName}</span><span>Profile Information</span></h2>
+            {alert && <div className="alert alert-info mt-3">{alert}</div>}
             <form className='mb-3' onSubmit={(e) => userEditSubmit(e)}>
                 <div className="mb-3 px-5">
                     <FontAwesomeIcon icon={faCircleUser} id='icons-login'/><label htmlFor="username" className="form-label">Your Name:</label>
