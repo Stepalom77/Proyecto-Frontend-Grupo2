@@ -33,10 +33,9 @@ const Login = () => {
             password:'',
         })
         const decodedJWT = parseJwt(data.data.token);
+        console.log(decodedJWT);
         const userName = decodedJWT.name;
         const emailUser = decodedJWT.email;
-        console.log(userName)
-        console.log(emailUser)
         setCurrentUser(emailUser);
         setCurrentUserName(userName);
         localStorage.setItem('token', data.data.token)

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { isLogin, setIsLogin, currentUser } = useContext(MyContext);
+    const { isLogin, setIsLogin, currentUser, currentUserName } = useContext(MyContext);
 
     const logout = async() => {
         localStorage.clear()
@@ -55,7 +55,7 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         <li className="nav-item" id='nav-item'>
-                            <NavLink className="btn border border-0 nav-link" id='navbar-button' to={`/user-profile/${currentUser}/profile`} activeclassname="active">
+                            <NavLink className="btn border border-0 nav-link" id='navbar-button' to={`/profile/${currentUserName}`} activeclassname="active">
                             <span >Profile</span> <span className="material-symbols-outlined">account_circle</span>
                             </NavLink>
                         </li>
