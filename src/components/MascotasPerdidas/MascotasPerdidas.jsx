@@ -77,7 +77,7 @@ const MascotasPerdidas = () => {
                                             {currentUser && (
                                                 <button className="btn btn-mapet-primary">Contact owner <span className="material-symbols-outlined">pets</span></button>
                                             )}                                            </div>
-                                            <p className="card-text contact" style={{gap: 0.3 + 'rem'}}><a className="text-success" href="/login"><span className="material-symbols-outlined" >login</span>Log in </a>  to see owner's contact information</p>
+                                            {!isLogin && <p className="card-text contact" style={{gap: 0.3 + 'rem'}}><a className="text-success" href="/login"><span className="material-symbols-outlined" >login</span>Log in </a>  to see owner's contact information</p>}
                                             
                                         </div>
                                     </article>
