@@ -538,6 +538,7 @@ main{
 
 .card {
     margin-bottom: 3vh;
+    cursor: pointer;
 }
 
 .card-body {

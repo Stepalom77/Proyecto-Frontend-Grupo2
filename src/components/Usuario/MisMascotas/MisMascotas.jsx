@@ -117,7 +117,7 @@ const MisMascotas = () => {
                                                 >
                                                     <FontAwesomeIcon icon={faTrash} />
                                                 </button>
-                                                <NavLink to={`/pet/${pet.pet_id}`}>
+                                                <NavLink to={`/pet-edit/${pet.pet_id}`}>
                                                     <button type="submit" className="btn btn-sm">
                                                             <FontAwesomeIcon icon={faPencil} />
                                                     </button>

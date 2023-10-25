@@ -34,6 +34,16 @@ const Profile = () => {
         }
     }, [jwt, currentUserName]);
 
+    useEffect(() => {
+        if(user) {
+            setUserEditData({
+                email: user.email,
+                mobile_number: user.mobile_number,
+                username: user.username
+            })
+        }
+    }, [user]);
+
     const userEditChange = (e) => {
         const { name, value } = e.target;
         setUserEditData((prevData) => ({
@@ -49,11 +59,6 @@ const Profile = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${jwt}`
             }});
-            setUserEditData({
-                username: '',
-                email: '',
-                mobile_number: ''
-            });
             setCurrentUser(userData.data.email);
             setCurrentUserName(userData.data.username);
             setAlert('Data successfully created!');
@@ -71,21 +76,21 @@ const Profile = () => {
             <form className='mb-3' onSubmit={(e) => userEditSubmit(e)}>
                 <div className="mb-3 px-5">
                     <FontAwesomeIcon icon={faCircleUser} id='icons-login'/><label htmlFor="username" className="form-label">Your Name:</label>
-                        <input type="text" className="form-control" id="username" placeholder={user && user.username ? user.username : ''} name='username'
+                        <input type="text" className="form-control" id="username" value={userEditData.username} name='username'
                         onChange={(e) => {
                             userEditChange(e);
                         }}/>
                 </div>
                 <div className="mb-3 px-5">
                     <FontAwesomeIcon icon={faEnvelope} id='icons-login'/> <label htmlFor="emailLogin" className="form-label ms-1">Your Email:</label>
-                        <input type="email" className="form-control" id="emailLogin" aria-describedby="emailHelp" placeholder={user && user.email ? user.email : ''} name='email'
+                        <input type="email" className="form-control" id="emailLogin" aria-describedby="emailHelp" value={userEditData.email} name='email'
                         onChange={(e) => {
                             userEditChange(e);
                         }}/>
                 </div>
                 <div className="mb-3 px-5">
                     <FontAwesomeIcon icon={faPhone} id='icons-login'/><label htmlFor="mobileNumber" className="form-label">Enter Phone Number:</label>
-                        <input type="text" className="form-control" id="mobileNumber" placeholder={user && user.mobile_number ? user.mobile_number : ''} name='mobile_number'
+                        <input type="text" className="form-control" id="mobileNumber" value={userEditData.mobile_number ? userEditData.mobile_number : ''} name='mobile_number'
                         onChange={(e) => {
                             userEditChange(e);
                         }}/>
