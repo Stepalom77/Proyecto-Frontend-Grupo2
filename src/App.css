@@ -147,5 +147,10 @@ main.row {
     
     #nav-item {
         margin-bottom: 0.25rem;
+        font-size: small !important;
+    }
+
+    #navbar-button {
+        font-size: small !important;
     }
 }

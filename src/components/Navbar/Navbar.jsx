@@ -1,10 +1,11 @@
 import './Navbar.css'
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { MyContext } from '../../context/MyProvider';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const { isLogin, setIsLogin, currentUser, currentUserName } = useContext(MyContext);
 
@@ -13,16 +14,20 @@ const Navbar = () => {
         setIsLogin(false);
         navigate("/logout");
     }
+
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    };
     return(
         <nav className="navbar navbar-expand-lg" id='navbar'>
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">
                     <img className="logo" src="/assets/img/mapet.svg" alt="MAPet"/>
                 </a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" onClick={toggleNavbar} aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse ms-4" id="navbarNav">
+                <div className={`collapse navbar-collapse ms-4 ${isOpen ? 'show' : ''}`} id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item" id='nav-item'>
                             <NavLink className="btn border border-0 nav-link" id='navbar-button' to="/" activeclassname="active">
