@@ -14,6 +14,7 @@ const Register = () => {
         email: '',
         user_type:''
     });
+    const [alert, setAlert] = useState('');
 
     const userRegisterChange = (e) => {
         const { name, value } = e.target;
@@ -25,17 +26,23 @@ const Register = () => {
       };
 
       const userRegisterSubmit = async (e) => {
-        e.preventDefault();
-        await axios.post(API_ROUTE + 'users', userRegisterData, {headers: {
-            'Content-Type': 'application/json',
-        }})
-        setUserRegisterData({
-            username:'',
-            password:'',
-            email: '',
-            user_type:''
-        })
-        navigate("/login");
+        try {
+            e.preventDefault();
+            await axios.post(API_ROUTE + 'users', userRegisterData, {headers: {
+                'Content-Type': 'application/json',
+            }})
+            setUserRegisterData({
+                username:'',
+                password:'',
+                email: '',
+                user_type:''
+            })
+            navigate("/login");
+            setAlert('Successfully register');
+        } catch(err) {
+            setAlert('There was an error with the information');
+        }
+
       };
     
     
@@ -43,6 +50,7 @@ const Register = () => {
     return(
         <div className="container">
             <div className="h1 text-center" id='register-margin'>Sign<span className='ms-2' id="register-header-color" >UP</span></div>
+            {alert && <div className="alert alert-info mt-3">{alert}</div>}
             <form className='mb-3' onSubmit={(e) => userRegisterSubmit(e)}>
                 <div className="mb-3 px-5">
                 <FontAwesomeIcon icon={faUser} id='icons-register'/> <label htmlFor="name" className="form-label">Your Name:</label>
