@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
-import './MascotasRegisterEdit.css';
+import React, { useState, useEffect } from 'react';
+import './MascotaEdit.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_ROUTE } from '../../../helpers/ApiRoute';
-import { MyContext } from '../../../context/MyProvider';
 
-const MascotasRegister = () => {
-    const { currentUserName } = useContext(MyContext);
+const MascotaEdit = () => {
+    const { petId } = useParams();
+    const [pet, setPet] = useState(null);
     const [petTypes, setPetTypes] = useState([]);
     const [breads, setBreeds] = useState([]);
     const [type, setType] = useState('');
@@ -31,7 +31,7 @@ const MascotasRegister = () => {
     }, []);
 
     useEffect(() => {
-        if(jwt) {
+        if(jwt && petId) {
             const getPetTypes = async() => {
                 const userData = await axios.get(API_ROUTE + 'util/pettype', {headers: {
                     'Content-Type': 'application/json',
@@ -40,18 +40,44 @@ const MascotasRegister = () => {
                 setPetTypes(userData.data);
             }
             getPetTypes();
+
+            const getPet = async() => {
+                const petData = await axios.get(API_ROUTE + `pets/${petId}`, {headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwt}`
+                }});
+                setPet(petData.data[0]);
+            }
+            getPet();
         }
 
-    }, [jwt]);
+    }, [jwt, petId]);
 
     useEffect(() => {
+        if(pet) {
+            console.log('pet', pet);
+            setPetData({
+                age: pet.age,
+                breed_id: pet.breed_id,
+                name: pet.name,
+                owner_user: pet.owner.username,
+                pet_status: pet.status_id,
+                pet_type: pet.pet_type
+            });
+            setType(pet.pet_type);
+            setBreed(pet.breed_id);
+            setStatus(pet.status_id);
+        }
+    }, [pet]);
+
+    /*useEffect(() => {
         if(currentUserName) {
             setPetData(prevData => ({
                 ...prevData,
                 owner_user: currentUserName
               }));
         }
-    }, [currentUserName]);
+    }, [currentUserName]);*/
 
     useEffect(() => {
         if(type && jwt) {
@@ -88,13 +114,11 @@ const MascotasRegister = () => {
         }
     }, [status]);
 
-    
-
     const onPhotoChange = (e) => {
         setPhoto(e.target.files[0])
     }
 
-    const createPetChange = (e) => {
+    const editPetChange = (e) => {
         const { name, value } = e.target;
         const newValue = name === 'age' ? Number(value) : value;
         setPetData((prevData) => ({
@@ -103,37 +127,25 @@ const MascotasRegister = () => {
         }));
       };
     
-      const createPetSubmit = async (e) => {
+      const editPetSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        if(photo) {
-            formData.append('photos', photo);
-        }
         setPetData((prevData) => ({
             ...prevData,
             age: parseInt(petData.age) ,
           }));
-        formData.append('json', JSON.stringify(petData));
         console.log(petData);
         try {
-            const createPet = await axios.post(API_ROUTE + 'pets', formData, {
+            const editPet = await axios.patch(API_ROUTE + `pets/${petId}`, petData, {
               headers: {
                 'Authorization': `Bearer ${jwt}`,
               },
             });
+            console.log(editPet);
             // If the request is successful
-            setAlert('Pet successfully created!');
-            setPetData({
-              name: '',
-              owner_user: '',
-              pet_type: 0,
-              breed_id: 0,
-              pet_status: 0,
-              age: 0,
-            });
+            setAlert('Pet successfully edited!');
           } catch (error) {
             // If the request fails
-            setAlert(`Failed to create pet`);
+            setAlert(`Failed to edit pet`);
           }
       };
 
@@ -141,11 +153,11 @@ const MascotasRegister = () => {
         <div className="container">
             <div className="h1 text-center" id='register-margin'>Pet<span className='ms-2' id="register-header-color" >DATA</span></div>
             {alert && <div className="alert alert-info mt-3">{alert}</div>}
-            <form className='mb-3' onSubmit={(e) => createPetSubmit(e)}>
+            <form className='mb-3' onSubmit={(e) => editPetSubmit(e)}>
                 <div className="mb-3 px-5">
                     <FontAwesomeIcon icon={faPaw} id='icons-register'/> 
                     <label for="pet-name" className="form-label">Pet Name:</label>
-                    <input type="text" className="form-control" id="pet-name" placeholder='Your Pet Name' name='name'  onChange={(e) => createPetChange(e)} />
+                    <input type="text" className="form-control" id="pet-name" name='name' value={petData.name ? petData.name : ''}  onChange={(e) => editPetChange(e)} />
                 </div>
 
                 <div className="mb-3 px-5">
@@ -182,7 +194,7 @@ const MascotasRegister = () => {
                 <div className="mb-3 px-5">
                     <FontAwesomeIcon icon={faPaw} id='icons-register'/> 
                     <label for="pet_age" className="form-label">Age:</label>
-                    <input type="number" className="form-control" id="pet_age" placeholder='Enter pet age' name='age' onChange={(e) => createPetChange(e)}/>
+                    <input type="number" className="form-control" id="pet_age" value={petData.age !== undefined ? petData.age : ''} name='age' onChange={(e) => editPetChange(e)}/>
                 </div>
                 <div className="mb-3 px-5">
                     <FontAwesomeIcon icon={faPaw} id='icons-register'/> 
@@ -197,15 +209,9 @@ const MascotasRegister = () => {
                     </select>
                 </div>
 
-                <div class="mb-3 px-5">
-                    <FontAwesomeIcon icon={faPaw} id='icons-register'/>
-                  <label htmlfor="Image" class="form-label">Photo:</label>
-                  <input type="file" class="form-control" onChange={(e) => onPhotoChange(e)} id="Image"/>
-                </div>
-
                 <div className="d-flex flex-row justify-content-center">
                     <button type="submit" className="btn" id="register-button">
-                        <span className="pe-1">Create pet</span>
+                        <span className="pe-1">Edit pet</span>
                         <FontAwesomeIcon icon={faPaw} />
                     </button>
                 </div>
@@ -222,4 +228,4 @@ const MascotasRegister = () => {
     );
 };
 
-export default MascotasRegister;
+export default MascotaEdit;
