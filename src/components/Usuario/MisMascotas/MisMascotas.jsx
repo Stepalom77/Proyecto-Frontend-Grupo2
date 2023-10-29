@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './MisMascotas.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faPlusCircle, faQrcode, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import { MyContext } from '../../../context/MyProvider';
 import AlertMessage from './AlertMessage'; // Importa el componente de alerta
@@ -104,24 +104,37 @@ const MisMascotas = () => {
                                     {pets.map((pet) => (
                                         <tr key={pet.pet_id}>
                                             <th scope="row" className="text-left-header">
-                                                {pet.name}
+                                                <a href={`/pet/${pet.pet_id}`} className='text-mapet'>{pet.name}</a>
                                             </th>
-                                            <td>
-                                                <span className={`ms-2 ${pet.status_id === 1 ? 'pet-found' : 'pet-lost'}`}>
-                                                    {pet.status}
-                                                </span>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-sm"
-                                                    onClick={() => handleDeletePet(pet.pet_id)}
-                                                >
-                                                    <FontAwesomeIcon icon={faTrash} />
-                                                </button>
-                                                <NavLink to={`/pet-edit/${pet.pet_id}`}>
-                                                    <button type="submit" className="btn btn-sm">
-                                                            <FontAwesomeIcon icon={faPencil} />
+                                            <td className='flex-cell'>
+                                                <div className='pet-status'>
+                                                    <span className={`ms-2 ${pet.status_id === 1 ? 'pet-found' : 'pet-lost'}`}>
+                                                        {pet.status}
+                                                    </span>
+                                                </div>
+                                                
+
+                                                <div className='pet-actions'>
+                                                    <button onClick={() => window.location.href= `${pet.qr_code}`}> 
+                                                        <FontAwesomeIcon icon={faQrcode} />
                                                     </button>
-                                                </NavLink>
+                                                    
+                                                    <NavLink to={`/pet-edit/${pet.pet_id}`}>
+                                                        <button type="submit" className="btn btn-sm">
+                                                                <FontAwesomeIcon icon={faPencil} />
+                                                        </button>
+                                                    </NavLink>
+                                                    
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-sm"
+                                                        onClick={() => handleDeletePet(pet.pet_id)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faTrash} />
+                                                    </button>
+                                                </div>
+
+                                                
                                             </td>
                                         </tr>
                                     ))}
