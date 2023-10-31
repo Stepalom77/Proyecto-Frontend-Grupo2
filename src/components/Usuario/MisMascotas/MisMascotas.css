@@ -29,3 +29,12 @@ padding: 0;
 .text-left-header {
     text-align: left;
 }
+
+a {
+    text-decoration: none !important;
+}
+
+.flex-cell {
+    display: flex;
+    gap: 1rem;
+}
