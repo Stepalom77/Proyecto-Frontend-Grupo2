@@ -104,7 +104,7 @@ const MisMascotas = () => {
                                     {pets.map((pet) => (
                                         <tr key={pet.pet_id}>
                                             <th scope="row" className="text-left-header">
-                                                <a href={`/pet/${pet.pet_id}`} className='text-mapet'>{pet.name}</a>
+                                                <NavLink to={`/pet/${pet.pet_id}`} className='text-mapet'>{pet.name}</NavLink>
                                             </th>
                                             <td className='flex-cell'>
                                                 <div className='pet-status'>

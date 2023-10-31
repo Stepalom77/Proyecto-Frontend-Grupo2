@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const Mascota = ({petId}) => {
-    // const { petId } = useParams();
+const Mascota = () => {
+    const { petId } = useParams();
     const navigate = useNavigate();
     const [pet, setPet] = useState(null); 
     const { currentUser, isLogin } = useContext(MyContext);
@@ -19,18 +19,11 @@ const Mascota = ({petId}) => {
         };
 
         const fetchPet = async () => {
-            // try {
-            //     const response = await fetch(API_ROUTE + `pets/${petId}`, { headers });
-            //     const data = await response.json();
-            //     const petData = data;
-            //     setPet(petData); 
-            // } catch (error) {
-            //     console.error('Error fetching pet', error);
-            // }
+            
             axios.get(API_ROUTE + `pets/${petId}`, { headers })
             .then((response) => {
                 const petData = response.data;
-                setPet(petData);
+                setPet(petData[0]);
             })
             .catch((error) => {
                 console.error('Error fetching pet', error);
@@ -47,13 +40,13 @@ const Mascota = ({petId}) => {
 
 
     return (
-        <div className="">
+        <div className="mt-5">
             <main className="row justify-content-around">
                 <div className="container-fluid">
                     <div className="row justify-content-around">
                         <div className="row justify-content-around bounce-in-bottom" id="cardDisplayer">
                             <article className="card col-md-10 col-lg-5 col-xl-4">
-                                        {/* {pet.photos[0]?.url && <img src={pet.photos[0]?.url} className="card-img-top" alt={pet.name} />} */}
+                                        {pet.photos[0]?.url && <img src={pet.photos[0]?.url} className="card-img-top" alt={pet.name} />}
                                         <div className="card-body">
                                             <h5 className="card-title">{pet.name}</h5>
                                             <p className="card-text special"><span className="special" >Type: </span>{pet.type}</p>
