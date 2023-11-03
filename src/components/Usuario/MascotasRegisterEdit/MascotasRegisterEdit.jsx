@@ -15,6 +15,7 @@ const MascotasRegister = () => {
     const [breed, setBreed] = useState('');
     const [status, setStatus] = useState(null);
     const [alert, setAlert] = useState('');
+    const [qrCodeURL, setQRCodeURL] = useState(null); 
     const [jwt, setJwt] = useState(null);
     const [photo, setPhoto] = useState(null);
     const [petData, setPetData] = useState({
@@ -121,6 +122,10 @@ const MascotasRegister = () => {
                 'Authorization': `Bearer ${jwt}`,
               },
             });
+            if (createPet.data && createPet.data.qr_code) {
+                // Si el post dio OK y tengo la Url del qur, lo muestro
+                setQRCodeURL(createPet.data.qr_code);
+            }
             // If the request is successful
             setAlert('Pet successfully created!');
             setPetData({
@@ -141,6 +146,13 @@ const MascotasRegister = () => {
         <div className="container">
             <div className="h1 text-center" id='register-margin'>Pet<span className='ms-2' id="register-header-color" >DATA</span></div>
             {alert && <div className="alert alert-info mt-3">{alert}</div>}
+
+            {qrCodeURL && (
+                <div className="text-center mt-3">
+                    <img src={qrCodeURL} alt="QR Code" />
+                </div>
+            )}
+
             <form className='mb-3' onSubmit={(e) => createPetSubmit(e)}>
                 <div className="mb-3 px-5">
                     <FontAwesomeIcon icon={faPaw} id='icons-register'/> 
