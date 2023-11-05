@@ -56,3 +56,7 @@
 	-webkit-animation: bounce-in-bottom 1.5s both;
 	        animation: bounce-in-bottom 1.5s both;
 }
+
+.fuente{
+        font-size: 1em !important;
+}

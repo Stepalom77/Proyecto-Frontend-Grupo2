@@ -97,7 +97,7 @@ const MisMascotas = () => {
                                 <thead>
                                     <tr>
                                         <th className="text-left-header">Pet</th>
-                                        <th className="text-left-header">Status / Actions</th>
+                                        <th className="text-left-header">Status / / Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -115,10 +115,6 @@ const MisMascotas = () => {
                                                 
 
                                                 <div className='pet-actions'>
-                                                    <button onClick={() => window.location.href= `${pet.qr_code}`}> 
-                                                        <FontAwesomeIcon icon={faQrcode} />
-                                                    </button>
-                                                    
                                                     <NavLink to={`/pet-edit/${pet.pet_id}`}>
                                                         <button type="submit" className="btn btn-sm">
                                                                 <FontAwesomeIcon icon={faPencil} />
