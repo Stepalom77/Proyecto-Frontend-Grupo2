@@ -24,8 +24,8 @@ const Navbar = () => {
                 <a className="navbar-brand" href="/">
                     <img className="logo" src="/assets/img/mapet.svg" alt="MAPet"/>
                 </a>
-                <button className="navbar-toggler" type="button" onClick={toggleNavbar} aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                <button className="navbar-toggler navbar-icon-color" type="button" onClick={toggleNavbar} aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon navbar-icon-color"></span>
                 </button>
                 <div className={`collapse navbar-collapse ms-4 ${isOpen ? 'show' : ''}`} id="navbarNav">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
