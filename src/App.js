@@ -12,6 +12,7 @@ import MyProvider from './context/MyProvider';
 import MascotasRegister from './components/Usuario/MascotasRegisterEdit/MascotasRegisterEdit';
 import Profile from './components/Usuario/Profile/Profile';
 import MascotaEdit from './components/Usuario/MascotaEdit/MascotaEdit';
+import Mascota from './components/MascotasPerdidas/Mascota/Mascota';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/profile/:user' element={<Profile/>}/>
         <Route path='/lost-pets' element={<MascotasPerdidas/>}/>
         <Route path='/pet' element={<MascotasRegister/>}/>
+        <Route path='/pet/:petId' element={<Mascota/>}/>
         <Route path='/pet-edit/:petId' element={<MascotaEdit/>}/>
         <Route path='/my-pets' element={<MisMascotas/>}/>
         <Route path='/login' element={<Login/>}/>

@@ -1,3 +1,8 @@
+#root > .App:nth-child(2) {
+    overflow-x: hidden;
+    max-width: fit-content;
+}
+
 .hero-header {
     background:
         /* url('static/img/bg-top.png'),
@@ -12,6 +17,7 @@
         /* left 45% bottom -1px, */
         center bottom -1px;
     background-repeat: no-repeat;
+    background-size: auto, contain;
 }
 
 .hero-img {

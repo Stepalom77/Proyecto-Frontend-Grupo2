@@ -1,6 +1,23 @@
 import './Home.css';
+import React, { useContext } from 'react';
+import { MyContext } from '../../context/MyProvider';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Home = () => {
+
+    const { isLogin } = useContext(MyContext);
+    const Navigate = useNavigate();
+
+    const handleRegisterClick = () => {
+        if (isLogin) {
+      
+            Navigate('/pet');
+        } else {
+      
+            Navigate('/register');
+        }
+    };
+
     return(
         <div className="m-0 p-0">
             <div className="bg-navy position-relative p-0">
@@ -12,7 +29,7 @@ const Home = () => {
                                 <p className="text-white pb-3 animated zoomIn">
                                     Register your pet and create a unique QR code that can be used to contact you if your pet is lost. Engrave badges, create velcro stripes, and declare your pet missing on our announcements page. Protect your furry friend with MAPet today!
                                     </p>
-                                <a href="/register" className="btn btn-mapet py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Register Your Pet Now</a>
+                                <button onClick={handleRegisterClick} className="btn btn-mapet py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Register Your Pet Now</button>
                             </div>
                             <div className="col-lg-6 text-center text-lg-start">
                                 <img className="img-fluid hero-img" src="/assets/img/rocco_hero.png" alt="Hero"/>
