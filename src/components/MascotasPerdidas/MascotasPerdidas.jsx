@@ -71,12 +71,12 @@ const MascotasPerdidas = () => {
                                         
                                         <div className="card-body">
                                             <h5 className="card-title">{pet.name}</h5>
-                                            <p className="card-text special"><span className="special" >Type: </span>{pet.type}</p>
-                                            <p className="card-text special"><span className="special" >Breed: </span>{pet.breed}</p>
-                                            <p className="card-text special"><span className="special" >Age: </span>{pet.age}</p>
-                                            {isLogin && <p className="card-text special"><span className="special" >Owner: </span>{pet.owner.username}</p>}
-                                            {isLogin && <p className="card-text contact"><span className="material-symbols-outlined" >call</span> {pet.owner.mobile_number} </p>}
-                                            {isLogin && <p className="card-text contact"><span className="material-symbols-outlined" >mail</span> {pet.owner.email} </p>}
+                                            <p className="card-text special fuente"><span className="special" >Type: </span>{pet.type}</p>
+                                            <p className="card-text special fuente"><span className="special" >Breed: </span>{pet.breed}</p>
+                                            <p className="card-text special fuente"><span className="special" >Age: </span>{pet.age}</p>
+                                            {isLogin && <p className="card-text special fuente"><span className="special" >Owner: </span>{pet.owner.username}</p>}
+                                            {isLogin && <p className="card-text contact fuente"><span className="material-symbols-outlined" >call</span> {pet.owner.mobile_number} </p>}
+                                            {isLogin && <p className="card-text contact fuente"><span className="material-symbols-outlined" >mail</span> {pet.owner.email} </p>}
                                             <div className="btns-wrapper">
                                             {currentUser && (
                                                 <button className="btn btn-mapet-primary" onClick={()=> (window.location.href = `mailto:${pet.owner.email}`) }>Contact owner <span className="material-symbols-outlined">pets</span></button>

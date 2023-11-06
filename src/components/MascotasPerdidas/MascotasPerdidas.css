@@ -560,7 +560,7 @@ main{
 }
 
 .card-body > .special:not(.owner) {
-    width: 45%;
+    width: 100%;
 }
 
 .card-title {
@@ -575,7 +575,7 @@ main{
 
 .card-text .special, .card-text.contact span {
     color: #21be9c;
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-right: 0.5rem;
     text-transform: uppercase;
 }
@@ -611,6 +611,10 @@ main{
     }
 
     .card-body > .special:not(.owner) {
-        width: 50%;
+        width: 100%;
     }
+}
+
+.fuente{
+    font-size: 2rem !important;
 }

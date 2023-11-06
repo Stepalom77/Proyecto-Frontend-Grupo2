@@ -65,7 +65,7 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         <li className="nav-item" id='nav-item' style={{cursor: 'pointer'}} onClick={logout}>
-                            <div className="btn border border-0" id='navbar-button'>
+                            <div className="btn border border-0 nav-link" id='navbar-button'>
                             <span >Logout</span> <span className="material-symbols-outlined">logout</span>
                             </div>
                         </li>
