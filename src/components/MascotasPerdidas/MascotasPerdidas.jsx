@@ -78,7 +78,7 @@ const MascotasPerdidas = () => {
                                             {isLogin && <p className="card-text contact fuente"><span className="material-symbols-outlined" >call</span> {pet.owner.mobile_number} </p>}
                                             {isLogin && <p className="card-text contact fuente"><span className="material-symbols-outlined" >mail</span> {pet.owner.email} </p>}
                                             <div className="btns-wrapper">
-                                            {currentUser && (
+                                            {isLogin && (
                                                 <button className="btn btn-mapet-primary" onClick={()=> (window.location.href = `mailto:${pet.owner.email}`) }>Contact owner <span className="material-symbols-outlined">pets</span></button>
                                             )}
                                             { !isLogin && <div class="btns-wrapper">
